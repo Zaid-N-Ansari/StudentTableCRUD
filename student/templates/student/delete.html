@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock title %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<a id="redirect_url" href="{% url 'student:read' %}"></a>
+<a id="del_record" href="{% url 'student:delete_student_record' rn %}"></a>
+<script defer>
+	if("{{DoesExist}}" == "True") {
+		const swalWithBootstrapButtons = Swal.mixin({
+			customClass: {
+				confirmButton: "btn btn-success ml-3",
+				cancelButton: "btn btn-danger mr-3"
+			},
+			buttonsStyling: false,
+		});
+		swalWithBootstrapButtons.fire({
+			title: "Are you sure?",
+			text: "This Change will be Permanent",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Yes",
+			cancelButtonText: "No",
+			reverseButtons: true
+		}).then((result) => {
+			if (result.isConfirmed) {
+				swalWithBootstrapButtons.fire({
+					title: "Deleted!",
+					text: "Record Deleted",
+					icon: "success"
+				}).then((result) => {
+					document.querySelector("#del_record").click();
+				});
+			}
+			else{
+				swalWithBootstrapButtons.fire({
+					title: "Cancelled",
+					text: "Record is Untouched",
+					icon: "error"
+				}).then((result) => {
+					document.querySelector("#redirect_url").click();
+				});
+			}
+		});
+	}
+	else {
+		Swal.fire({
+			icon: "error",
+			title: "Record Not Found",
+			text: "Student with Roll Number: {{rn}} Does Not Exists"
+		}).then((result) => {
+			if(result.isConfirmed) {
+				document.querySelector("#redirect_url").click();
+			}
+		});
+		
+	}
+</script>
+{% endblock content %}

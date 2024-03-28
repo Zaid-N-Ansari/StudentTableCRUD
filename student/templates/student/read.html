@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Read{% endblock title %}
+
+{% block content %}
+<style>
+	td.del {
+		display: flex;
+		flex-direction: row !important;
+		align-items: center;
+		justify-content: space-around;
+	}
+</style>
+<div class="container-fluid text-center">
+	<div class="row mt-5 flex-row">
+		<div class="col-md-12">
+			<table class="table table-hover user-select-none">
+				<thead>
+					<tr>
+						<th scope="col">Roll Number</th>
+						<th scope="col">Name</th>
+						<th scope="col">Class</th>
+						<th scope="col">BirthDay</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for data in tabledata %}
+					<tr>
+						<td scope="row">{{data.roll_no}}</td>
+						<td>{{data.name}}</td>
+						<td>{{data.std}}</td>
+						<td>{{data.birthdate}}</td>
+						<td class="d-flex flex-row justify-content-around">
+							<a href="{% url 'student:delete' data.roll_no %}">
+								<span class="material-icons text-danger">
+									delete
+								</span>
+							</a>
+							<a href="{% url 'student:update' data.roll_no %}">
+								<span class="material-icons text-info">
+									edit
+								</span>
+							</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+{% endblock content %}

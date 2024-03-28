@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Create{% endblock title %}
+
+{% block content %}
+<style>
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+	}
+</style>
+<div class="container">
+	<div class="row mt-5 flex-row align-items-center">
+		<div class="col-md-8">
+			<h1 class="display-4 mb-4 user-select-none text-center">Create Student</h1>
+			<form method="POST">
+				{% csrf_token %}
+				{{form.as_div}}
+				<button type="submit" class="btn btn-primary float-right">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script defer>
+	document.querySelectorAll("form div").forEach(
+		formDiv => {
+			formDiv.className = "form-group";
+		}
+	);
+	document.querySelectorAll("form div label").forEach(
+		formDivLabel => {
+			formDivLabel.innerHTML = formDivLabel.innerHTML.replace(":", "");
+			formDivLabel.className = "m-0";
+		}
+	);
+	document.querySelectorAll("form div input").forEach(
+		formDivInput => {
+			formDivInput.className = "form-control";
+		}
+	);
+	document.querySelectorAll("form div ul").forEach(
+		formDivUL => {
+			formDivUL.className = "text-danger list-group";
+			formDivUL.children[0].className = "list-group-item list-group-item-danger border-0";
+		}
+	);
+</script>
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<style>
+	button.reurl {
+		background-color: antiquewhite;
+		height: 3rem;
+		border-radius: 1.5rem;
+		border: 1px var(--primary) solid;
+		transition: 0.2s ease-in-out background-color;
+	}
+	button.reurl a {
+		color: black;
+		font-size: large;
+	}
+	button.reurl:hover a{
+		color: var(--white);
+	}
+	button.reurl:hover {
+		border: 1px var(--info) solid;
+		background-color: var(--dark);
+	}
+</style>
+<div class="container">
+	<div class="row text-center mt-5">
+		<h1 class="display-3">CRUD Operations on Student Table</h1>
+	</div>
+	<div class="row mt-5">
+		<div class="col-md-12 d-flex flex-row justify-content-around">
+			<button class="col-md-3 mr-3 reurl">
+				<a class="text-decoration-none" href="{% url 'student:create' %}">Create</a>
+			</button>
+			<button class="col-md-3 mr-3 reurl">
+				<a class="text-decoration-none" href="{% url 'student:read' %}">Read</a>
+			</button>
+		</div>
+	</div>
+</div>
+{% endblock content %}
